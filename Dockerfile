@@ -25,6 +25,7 @@ RUN apt-get update \
     # On Ubuntu 20.04
     libunistring-dev \
     libaom-dev \
+    fonts-ipafont \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -48,6 +49,7 @@ RUN cp libopenh264-2.2.0-linux-arm64.6.so /opt/ffmpeg_build/lib/libopenh264.so.2
 WORKDIR /opt/ffmpeg_sources/FFmpeg-n4.4
 RUN PKG_CONFIG_PATH="/opt/ffmpeg_build/lib/pkgconfig" ./configure \
     --prefix="/opt/ffmpeg_build" \
+    --enable-libass \
     --enable-libopenh264 \
   && make -j `nproc` \
   && make install
